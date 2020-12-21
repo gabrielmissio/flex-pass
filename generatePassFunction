@@ -1,0 +1,20 @@
+function generatePass(length) {//password size = length * 4
+    var result = '';
+    var upCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var lowCaracters = 'abcdefghijklmnopqrstuvwxyz';
+    var numersCaracteres = '0123456789';
+    var specialCaracters = '.+-*/!@#$';
+    for ( var i = 0; i < length; i++ ) {
+       result += upCharacters.charAt(Math.floor(Math.random() * upCharacters.length));
+    }
+    for ( var i = 0; i < length; i++ ) {
+        result += lowCaracters.charAt(Math.floor(Math.random() * lowCaracters.length));
+    }
+    for ( var i = 0; i < length; i++ ) {
+        result += numersCaracteres.charAt(Math.floor(Math.random() * numersCaracteres.length));
+    }
+    for ( var i = 0; i < length; i++ ) {
+        result += specialCaracters.charAt(Math.floor(Math.random() * specialCaracters.length));
+    }
+    return resultstr.split('').sort(function(){return 0.5-Math.random()}).join('');
+ }

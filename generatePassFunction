@@ -1,20 +1,30 @@
-function generatePass(length) {//password size = length * 4
-    var result = '';
-    var upCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var lowCaracters = 'abcdefghijklmnopqrstuvwxyz';
-    var numersCaracteres = '0123456789';
-    var specialCaracters = '.+-*/!@#$';
-    for ( var i = 0; i < length; i++ ) {
-       result += upCharacters.charAt(Math.floor(Math.random() * upCharacters.length));
-    }
-    for ( var i = 0; i < length; i++ ) {
-        result += lowCaracters.charAt(Math.floor(Math.random() * lowCaracters.length));
-    }
-    for ( var i = 0; i < length; i++ ) {
-        result += numersCaracteres.charAt(Math.floor(Math.random() * numersCaracteres.length));
-    }
-    for ( var i = 0; i < length; i++ ) {
-        result += specialCaracters.charAt(Math.floor(Math.random() * specialCaracters.length));
-    }
-    return resultstr.split('').sort(function(){return 0.5-Math.random()}).join('');
- }
+const generatePassword = ({numbers=2, upperCase=2, lowerCase=3, specials=1}) => {
+  const passwordLength = numbers+upperCase+lowerCase+specials;
+  const numberChars = '0123456789';
+  const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
+  const specialChars = '.+-*/!@#$';
+  
+  let password = '';
+  password += randomizer(numberChars, numbers);
+  password += randomizer(upperChars, upperCase);
+  password += randomizer(lowerChars, lowerCase);
+  password += randomizer(specialChars, specials);
+
+  return randomizer(password, passwordLength);
+}
+
+const randomizer = (array, length) => {
+  if (!array || !length){
+    return null;
+  }
+
+  if(array.length < length ){
+    length = array.length;
+  }
+  let shuffled = array.split('').sort(() => {return 0.5-Math.random()}).join('');
+  return (shuffled.substr(0, length))
+}
+
+
+console.log(generatePassword({specials: 2}));

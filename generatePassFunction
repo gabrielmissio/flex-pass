@@ -1,30 +1,37 @@
-const generatePassword = ({numbers=2, upperCase=2, lowerCase=3, specials=1}) => {
-  const passwordLength = numbers+upperCase+lowerCase+specials;
-  const numberChars = '0123456789';
-  const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
-  const specialChars = '.+-*/!@#$';
-  
-  let password = '';
-  password += randomizer(numberChars, numbers);
-  password += randomizer(upperChars, upperCase);
-  password += randomizer(lowerChars, lowerCase);
-  password += randomizer(specialChars, specials);
+class PasswordGenerator {
+  static generate(
+    { numbers, upperCase, lowerCase, specials } = { numbers: 2, upperCase: 2, lowerCase: 3, specials: 1 }
+  ) {
+    const numbersPool = '0123456789';
+    const upperCasePool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowerCasePool = 'abcdefghijklmnopqrstuvwxyz';
+    const specialCharsPool = '.+-*/!@#$';
+    const passwordLength = numbers + upperCase + lowerCase + specials;
 
-  return randomizer(password, passwordLength);
-}
+    let password = '';
+    password += this.characterShuffler({ pool: numbersPool, desiredNumberOfCharacters: numbers });
+    password += this.characterShuffler({ pool: upperCasePool, desiredNumberOfCharacters: upperCase });
+    password += this.characterShuffler({ pool: lowerCasePool, desiredNumberOfCharacters: lowerCase });
+    password += this.characterShuffler({ pool: specialCharsPool, desiredNumberOfCharacters: specials });
 
-const randomizer = (array, length) => {
-  if (!array || !length){
-    return null;
+    return this.characterShuffler({ pool: password, desiredNumberOfCharacters: passwordLength });
   }
 
-  if(array.length < length ){
-    length = array.length;
+  static characterShuffler({ pool, desiredNumberOfCharacters }) {
+    if (!pool) throw new Error('MissingParamError: pool');
+    if (!desiredNumberOfCharacters) throw new Error('MissingParamError: desiredNumberOfCharacters');
+
+    const insufficientPool = pool.length < desiredNumberOfCharacters;
+    const currentNumberOfCharacters = insufficientPool ? pool.length : desiredNumberOfCharacters;
+
+    const response = pool
+      .split('')
+      .sort(() => 0.5 - Math.random())
+      .join('')
+      .substr(0, currentNumberOfCharacters);
+
+    return response;
   }
-  let shuffled = array.split('').sort(() => {return 0.5-Math.random()}).join('');
-  return (shuffled.substr(0, length))
 }
 
-
-console.log(generatePassword({specials: 2}));
+console.log(PasswordGenerator.generate());

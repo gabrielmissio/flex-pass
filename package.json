@@ -1,0 +1,11 @@
+{
+  "name": "flex-pass-js",
+  "version": "1.0.0",
+  "description": "This is a simple module that generates a random password based on specified criteria. It allows you to customize the length of the password, as well as the number of numbers, uppercase letters, lowercase letters, and special characters included.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Missio",
+  "license": "MIT License"
+}

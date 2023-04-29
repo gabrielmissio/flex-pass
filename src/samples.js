@@ -1,4 +1,4 @@
-const generatePassword = require('./password-generator')
+const generatePassword = require('./index')
 
 console.log(`Default: ${generatePassword()}`)
 /* 

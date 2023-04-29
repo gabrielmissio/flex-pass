@@ -4,7 +4,7 @@ const uppercaseCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const lowercaseCharacters = 'abcdefghijklmnopqrstuvwxyz'
 const specialCharacters = '.+-*/!@#$'
 
-function generatePassword({ numbers = 2, upperCase = 2, lowerCase = 3, specials = 1 } = {}) {
+function generatePassword({ numbers = 2, upperCase = 2, lowerCase = 2, specials = 2 } = {}) {
   // Generate password by shuffling characters from each pool
   let newPassword = ''
   newPassword += shuffleCharacters(numericCharacters, numbers)
@@ -36,3 +36,5 @@ function shuffleCharacters(characters, desiredLength) {
 
   return randomizedCharacters
 }
+
+module.exports = generatePassword
